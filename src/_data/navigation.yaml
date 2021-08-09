@@ -1,10 +1,10 @@
 ---
 items:
-  - text: Menu One
-    url: "#"
-  - text: Menu Two
-    url: "#"
-  - text: Menu Three
-    url: "#"
+  - text: Reddit
+    url: "https://reddit.com"
+  - text: DuckDuckGo
+    url: "https://duckduckgo.com"
+  - text: NEAT
+    url: "https://blog.surjithctly.in/neat-stack-create-a-static-website-with-netlify-cms-eleventy-alpinejs-and-tailwindcss"
   - text: Blog
     url: "/blog"
