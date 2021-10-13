@@ -7,7 +7,10 @@ permalink: "/gallery/{{ gallery.title | slugify }}/index.html"
 layout: gallery
 ---
 <div>
-  {% for currentGallery in gallery %}
-    {{ currentGallery.title | safe }}
-  {% endfor %}
+  {% set subtitle = gallery.title %}
+  {% set currentSculptureList = collections.galleryTreasures %}
+  {% include "src/_includes/partials/subtitle.html" %}
+  {% include "src/_includes/partials/currentSculptureList.html" %}
+<p>hello</p>
+
 </div>

@@ -7,7 +7,6 @@ const markdown = require("markdown-it")({
   html: true
 })
 
-
 module.exports = function (eleventyConfig) {
 
   // Slugify
@@ -58,7 +57,110 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addCollection("currentGallery", function(collectionApi, currentGallery) {
+    return collectionApi.getAll().filter(function(item, currentGallery) {
+      // Side-step tags and do your own filtering
+      // returns true or false. True => include in results.
+      if (String(currentGallery).toLowerCase().replace(/ /g,"") == String(item.data.currentGallery).toLowerCase().replace(/ /g,"")) {
+        return true
+      }
+      return false
+    });
+  });
 
+  eleventyConfig.addCollection("mediumFilter", function(collectionApi, medium) {
+    return collectionApi.getAll().filter(function(item, medium) {
+      // Side-step tags and do your own filtering
+      // returns true or false. True => include in results.
+      if (String(medium).toLowerCase().replace(/ /g,"") == String(item.data.medium).toLowerCase().replace(/ /g,"")) {
+        return true
+      }
+      return false
+    });
+  });
+
+  eleventyConfig.addFilter("galleryFilter", function(collectionApi,currentGallery) {
+    return collectionApi.getAll().filter(function(item, currentGallery) {
+      // Side-step tags and do your own filtering
+      // returns true or false. True => include in results.
+      if (String(currentGallery).toLowerCase().replace(/ /g,"") == String(item.data.currentGallery).toLowerCase().replace(/ /g,"")) {
+        return true
+      }
+      return false
+    });
+  });
+
+    // Wood Collection
+    eleventyConfig.addCollection("mediumyWood", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return String(item.data.medium).toLocaleLowerCase().replace(/ /g,"") === String("wood").toLocaleLowerCase().replace(/ /g,"")
+      });
+    });
+
+    // Bronzewood Collection
+    eleventyConfig.addCollection("mediumBronzewoodMeld", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return String(item.data.medium).toLocaleLowerCase().replace(/ /g,"") === String("bronzewoodmeld").toLocaleLowerCase().replace(/ /g,"")
+      });
+    });
+
+    // Stone Collection
+    eleventyConfig.addCollection("mediumStone", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return String(item.data.medium).toLocaleLowerCase().replace(/ /g,"") === String("stone").toLocaleLowerCase().replace(/ /g,"")
+      });
+    });
+
+    // Treasures Of The West Collection
+    eleventyConfig.addCollection("galleryTreasures", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") === String("treasuresofthewest").toLocaleLowerCase().replace(/ /g,"")
+      });
+    });
+
+    // Wings Collection
+    eleventyConfig.addCollection("galleryWings", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") === String("wings").toLocaleLowerCase().replace(/ /g,"")
+      });
+    });
+
+    // Reflections Collection
+    eleventyConfig.addCollection("galleryReflections", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") === String("reflections").toLocaleLowerCase().replace(/ /g,"")
+      });
+    });
+
+    // Other Worlds Collection
+    eleventyConfig.addCollection("galleryOtherWorlds", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") === String("OtherWorlds").toLocaleLowerCase().replace(/ /g,"")
+      });
+    });
+
+    // Other Collection
+    eleventyConfig.addCollection("galleryOther", function(collectionApi) {
+      return collectionApi.getAll().filter(function(item) {
+        // Side-step tags and do your own filtering
+        // returns true or false. True => include in results.
+        return ((String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") != String("reflections").toLocaleLowerCase().replace(/ /g,"")) && (String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") != String("otherworlds").toLocaleLowerCase().replace(/ /g,"")) && (String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") != String("wings").toLocaleLowerCase().replace(/ /g,"")) && (String(item.data.gallery).toLocaleLowerCase().replace(/ /g,"") != String("treasuresofthewest").toLocaleLowerCase().replace(/ /g,"")))
+      });
+    });
 
   // Disable automatic use of your .gitignore
   eleventyConfig.setUseGitIgnore(false);

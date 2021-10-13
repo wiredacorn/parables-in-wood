@@ -1,12 +1,10 @@
 ---
 tags: sculptures
 title: Eternal Gain
-gallery: Treasures of the West
 medium: Wood
-subjectmatter: Man
+subjects:
+  - Native American Theme
 size: Full Size
-forsale: true
-inprogress: false
 price: 10000
 images:
   - title: Eternal Gain
@@ -57,4 +55,8 @@ poem: |-
   every trophy as a loss,
   unless it brings you glory,
   and keeps me kneeling at the cross.
+subjectmatter: Man
+gallery: Treasures of the West
+forsale: true
+inprogress: false
 ---

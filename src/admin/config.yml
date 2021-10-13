@@ -78,12 +78,15 @@ collections:
         multiple: false
         create: true
         options: ["Bronzewood Meld", "Stone", "StoneMeld", "Wood", "Bronze"]
-      - widget: select
-        label: "Subject Matter"
-        name: "subjectmatter"
-        multiple: false
+      - label: "Subject Matter"
+        name: "subjects"
+        widget: "relation"
+        multiple: true
         create: true
-        options: ["Abstract","Anchor","Angel","Bass","Bear","Bull","Child","Crayfish","Cross","Cross + Other","Deer","Dog","Dolphin","Dove","Duck","Eagle","Eagle Ray","Falcon","Hand","Heart","Horse","Infinity Symbol","Lizard","Logo","Man","Marine LIfe","Music Theme","native","Native American Theme","Otter","Parrot","Peacock","Pelican","Quail","Ram","Religious","Roadrunner","Rose","Sailfish","Scissortail","Starfish","Stingray","Swallow","Trout","Woman"]
+        collection: "subjectMatters"
+        search_fields: ["subjectMatters"]
+        display_fields: ["subjectMatters"]
+        value_field: "subjectMatters"
       - widget: select
         label: "size"
         name: "size"
@@ -149,12 +152,15 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "string" }
       - { label: "Award Date", name: "date", widget: "datetime" }
-      - widget: select
-        label: "tags"
-        name: "tags"
+      - label: "Subject Matter"
+        name: "subjects"
+        widget: "relation"
         multiple: true
         create: true
-        options: ["Abstract","Anchor","Angel","Bass","Bear","Bull","Child","Crayfish","Cross","Cross + Other","Deer","Dog","Dolphin","Dove","Duck","Eagle","Eagle Ray","Falcon","Hand","Heart","Horse","Infinity Symbol","Lizard","Logo","Man","Marine LIfe","Music Theme","native","Native American Theme","Otter","Parrot","Peacock","Pelican","Quail","Ram","Religious","Roadrunner","Rose","Sailfish","Scissortail","Starfish","Stingray","Swallow","Trout","Woman"]
+        collection: "subjectMatters"
+        search_fields: ["subjectMatters"]
+        display_fields: ["subjectMatters"]
+        value_field: "subjectMatters"
       - { label: "Award Details", name: "body", widget: "markdown" }
 
   - label: "Galleries"
@@ -212,28 +218,13 @@ collections:
           - { label: Author, name: author, widget: string }
           - { label: URL, name: url, widget: string }
 
-  - label: "subjectMatters"
+  - label: "Subject Matter List"
     name: "subjectMatters"
     create: true
     editor:
       preview: false
     folder: "src/subjectMatters"
     fields:
-      - label: "subjectMatters"
+      - label: "Subject Matter"
         name: "subjectMatters"
         widget: string
-
-  - label: "SculpturesRelation"
-    name: "sculpturesRelation"
-    folder: "src/sculpturesRelation"
-    create: true
-    editor:
-      preview: false
-    fields:
-      - label: "Subject Matter"
-        name: "subjects"
-        widget: "relation"
-        collection: "subjectMatters"
-        search_fields: ["subjectMatters"]
-        display_fields: ["subjectMatters"]
-        value_field: "subjectMatters"
