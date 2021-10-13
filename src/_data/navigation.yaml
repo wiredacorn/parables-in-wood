@@ -1,10 +1,17 @@
----
 items:
-  - text: Reddit
-    url: "https://reddit.com"
-  - text: DuckDuckGo
-    url: "https://duckduckgo.com"
-  - text: NEAT
-    url: "https://blog.surjithctly.in/neat-stack-create-a-static-website-with-netlify-cms-eleventy-alpinejs-and-tailwindcss"
-  - text: Blog
-    url: "/blog"
+  - text: Home
+    url: /
+  - text: USAFA
+    url: /usafa/
+  - text: Galleries
+    url: /galleries/
+  - text: Works For Sale
+    url: /works-for-sale/
+  - text: Works In Progress
+    url: /works-in-progress/
+  - text: Classes
+    url: /classes/
+  - text: Newsletter
+    url: /newsletter/
+  - text: About Chris
+    url: /about-chris/

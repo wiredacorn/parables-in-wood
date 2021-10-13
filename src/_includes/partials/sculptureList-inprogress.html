@@ -1,0 +1,66 @@
+<!--
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+  ```
+-->
+
+<div class="bg-white">
+  <div class="max-w-2xl mr-auto pb-16 px-4 sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <h2 class="sr-only">Products</h2>
+
+
+    <div class="sculptures grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        {% for sculpture in collections.inprogress %}
+        <a href="/sculptures/{{sculpture.data.title | slugify}}" class="group sculpture" data-gallery="{{sculpture.data.gallery | stringMe | safe}}">
+          <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+            <div 
+              class="hidden w-full h-full absolute h-full w-full background-image" 
+              style="
+                background-size:100% 100%;
+                filter:blur(5px);
+                background-image:url('{{ sculpture.data.images[0].src | safe }}')
+                "></div>
+            <img 
+              src="{{ sculpture.data.images[0].src | safe }}"
+              alt="{{ sculpture.data.images[0].alt | safe }}"
+              class="w-full h-full object-center object-cover group-hover:opacity-75"
+                />
+          </div>
+          {% if sculpture.data.title %}
+          <h3 class="mt-4 mb-0 text-sm text-gray-700">
+            {{ sculpture.data.title | safe }}
+          </h3>
+          {% endif %}
+          {% if sculpture.data.title %}
+          <h4 class="mt-0 text-sm text-gray-700">
+            {{ sculpture.data.gallery | safe }}
+          </h4>
+          {% endif %}
+          {% if sculpture.data.medium %}
+          <p class="mt-0 text-sm italic text-gray-400">
+            {{ sculpture.data.medium | safe }}
+          </p>
+          {% endif %}
+          {% if sculpture.data.price %}
+          <p class="mt-2 text-lg font-medium text-gray-900">
+            ${{ sculpture.data.price | safe }}
+          </p>
+          {% endif %}
+        </a>
+        {% endfor %}
+        <!-- More products... -->
+      </div>
+    </div>
+</div>
+  

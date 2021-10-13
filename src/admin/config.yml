@@ -9,29 +9,174 @@ media_folder: "src/static/img"
 public_folder: "/static/img"
 
 # Please run "npx netlify-cms-proxy-server" for local backend
-local_backend: false
+local_backend: true
+
 # publish_mode: editorial_workflow
 collections:
-  - label: "Blog"
-    name: "blog"
+  
+  - label: "Home Page"
+    name: "homepage"
+    slug: "/"
+    folder: "src/"
+    create: false
+    fields:
+      - { label: "Title", name: "title", default: "Home Page"}
+      - { label: "Layout", name: "homepage", widget: hidden, default: "homepage"}
+      - label: "Slides"
+        name: "slides"
+        widget: "list"
+        summary: 'Slide'
+        fields:
+          - label: Slide
+            name: slide
+            widget: object
+            summary: '{{fields.title}}'
+            fields:
+              - {label: "Title", name: "title", widget: "string", required: false}
+              - {label: "Description", name: "description", widget: "string", required: false}
+              - {label: "Dimensions", name: "dimensions", widget: "string", required: false}
+              - {label: "Button Text", name: "buttontext", widget: "string", required: false, default: "Learn More"}
+              - {label: "Link", name: "link", widget: "string", required: false}
+              - {label: Image, name: image, widget: image, required: false}
+      - { label: "Intro Title", name: "introtitle", widget: "string" }
+      - { label: "Intro Subtitle", name: "introsubtitle", widget: "string" }
+      - { label: "Intro Text", name: "introtext", widget: "markdown" }
+
+  - label: "Pages"
+    name: "pages"
+    folder: "src/pages"
+    create: true
+    fields:
+      - { label: "Title", name: "title", default: "Home Page" }
+      - { label: "URL", name: "permalink", required: false }
+      - { label: "Hero Image", name: "heroimage", widget: image, required: false }
+      - { label: "Stretch Hero Image?", name: "stretch", widget: boolean, default: true, required: false }
+      - {label: "Description", name: "description", widget: "string", required: false}
+      - {label: "Dimensions", name: "dimensions", widget: "string", required: false}
+      - {label: "Link", name: "link", widget: "string", required: false}
+      - { label: "Layout", name: "layout", widget: hidden, default: "pages" }
+
+  - label: "Sculptures"
+    name: "sculptures"
+    folder: "src/sculptures"
+    create: true
+    editor:
+      preview: false
+    fields:
+      - { label: "Tags", name: "tags", widget: "hidden", default: "sculptures"}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Custom URL", name: "permalink", widget: "string", required: false, default: "{slug}" }
+      - widget: select
+        label: "Gallery"
+        name: "gallery"
+        multiple: false
+        create: true
+        options: ["USAFA", "Wings", "Reflections", "Legacy", "Other Worlds", "Treasures of the West", "Other"]
+      - widget: select
+        label: "Medium"
+        name: "medium"
+        multiple: false
+        create: true
+        options: ["Bronzewood Meld", "Stone", "StoneMeld", "Wood", "Bronze"]
+      - widget: select
+        label: "Subject Matter"
+        name: "subjectmatter"
+        multiple: false
+        create: true
+        options: ["Abstract","Anchor","Angel","Bass","Bear","Bull","Child","Crayfish","Cross","Cross + Other","Deer","Dog","Dolphin","Dove","Duck","Eagle","Eagle Ray","Falcon","Hand","Heart","Horse","Infinity Symbol","Lizard","Logo","Man","Marine LIfe","Music Theme","native","Native American Theme","Otter","Parrot","Peacock","Pelican","Quail","Ram","Religious","Roadrunner","Rose","Sailfish","Scissortail","Starfish","Stingray","Swallow","Trout","Woman"]
+      - widget: select
+        label: "size"
+        name: "size"
+        multiple: false
+        create: true
+        options: ["Full Size", "Medium Size", "Collectible Size"]
+      - { label: "For Sale", name: "forsale", widget: "boolean", default: false }
+      - { label: "In Progress", name: "inprogress", widget: "boolean", default: false }
+      - { label: "Price", name: "price", widget: "number" }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        multiple: true
+        summary: '{{fields.title}}'
+        fields:
+          - {name: title, label: Title, widget: string, required: false}
+          - {name: alt, label: Alt text, widget: string, required: false}
+          - {name: src, label: Image, widget: image}
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Poem", name: "poem", widget: "markdown" }
+      
+  - label: "Newsletters"
+    name: "newsletters"
     folder: "src/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - widget: select
+        label: "tags"
+        name: "tags"
+        multiple: true
+        create: true
+        options: ["Abstract","Anchor","Angel","Bass","Bear","Bull","Child","Crayfish","Cross","Cross + Other","Deer","Dog","Dolphin","Dove","Duck","Eagle","Eagle Ray","Falcon","Hand","Heart","Horse","Infinity Symbol","Lizard","Logo","Man","Marine LIfe","Music Theme","native","Native American Theme","Otter","Parrot","Peacock","Pelican","Quail","Ram","Religious","Roadrunner","Rose","Sailfish","Scissortail","Starfish","Stingray","Swallow","Trout","Woman"]
+      - { label: "Newsletter Content", name: "body", widget: "markdown" }
+
+  - label: "Classes"
+    name: "classes"
+    folder: "src/classes"
     create: true
     editor:
       preview: false
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "string" }
-      - { label: "Author", name: "author", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Next Class Date", name: "date", widget: "datetime" }
+      - { label: "Tuition", name: "tuition", widget: "number" }
+      - { label: "Required Supplies", name: "supplies", widget: "markdown" }
+      - { label: "Upcoming Schedule Details (Sidebar)", name: "schedule", widget: "markdown" }
+      - { label: "Class Details", name: "body", widget: "markdown" }
+
+  - label: "Awards"
+    name: "Awards"
+    folder: "src/awards"
+    create: true
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Award Date", name: "date", widget: "datetime" }
       - widget: select
         label: "tags"
         name: "tags"
         multiple: true
         create: true
-        options: ["Tags", "created", "from", "config.yml"]
-  - label: "Settings"
-    name: "settings"
+        options: ["Abstract","Anchor","Angel","Bass","Bear","Bull","Child","Crayfish","Cross","Cross + Other","Deer","Dog","Dolphin","Dove","Duck","Eagle","Eagle Ray","Falcon","Hand","Heart","Horse","Infinity Symbol","Lizard","Logo","Man","Marine LIfe","Music Theme","native","Native American Theme","Otter","Parrot","Peacock","Pelican","Quail","Ram","Religious","Roadrunner","Rose","Sailfish","Scissortail","Starfish","Stingray","Swallow","Trout","Woman"]
+      - { label: "Award Details", name: "body", widget: "markdown" }
+
+  - label: "Galleries"
+    name: "galleries"
+    editor:
+      preview: false
+    files:
+      - label: "Gallery"
+        name: "gallery"
+        file: "src/_data/galleries.yaml"
+        fields:
+          - label: Gallery
+            name: gallery
+            widget: list
+            allow_add: true
+            collapsed: false
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: "Thumbnail Image", name: img, widget: image, default: "/asdf.img"}
+
+  - label: "Site Links"
+    name: "links"
     editor:
       preview: false
     files:
@@ -66,3 +211,29 @@ collections:
           - { label: Name, name: name, widget: string }
           - { label: Author, name: author, widget: string }
           - { label: URL, name: url, widget: string }
+
+  - label: "subjectMatters"
+    name: "subjectMatters"
+    create: true
+    editor:
+      preview: false
+    folder: "src/subjectMatters"
+    fields:
+      - label: "subjectMatters"
+        name: "subjectMatters"
+        widget: string
+
+  - label: "SculpturesRelation"
+    name: "sculpturesRelation"
+    folder: "src/sculpturesRelation"
+    create: true
+    editor:
+      preview: false
+    fields:
+      - label: "Subject Matter"
+        name: "subjects"
+        widget: "relation"
+        collection: "subjectMatters"
+        search_fields: ["subjectMatters"]
+        display_fields: ["subjectMatters"]
+        value_field: "subjectMatters"

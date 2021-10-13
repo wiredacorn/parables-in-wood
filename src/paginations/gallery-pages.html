@@ -1,0 +1,13 @@
+---
+pagination:
+  data: galleries.gallery
+  size: 1
+  alias: gallery
+permalink: "/gallery/{{ gallery.title | slugify }}/index.html"
+layout: gallery
+---
+<div>
+  {% for currentGallery in gallery %}
+    {{ currentGallery.title | safe }}
+  {% endfor %}
+</div>
